@@ -60,21 +60,24 @@ variable "nic_enable_accelerated_networking" {
 variable "nic1_ip_configuration" {
   description = "Defines how a private IP address is assigned. Options are Static or Dynamic. In case of Static also specifiy the desired privat IP address"
   default = {
-    private_ip_address            = [null]
+    private_ip_address1           = [null]
+    private_ip_address2           = [null]
     private_ip_address_allocation = ["Dynamic"]
   }
 }
 variable "nic2_ip_configuration" {
   description = "Defines how a private IP address is assigned. Options are Static or Dynamic. In case of Static also specifiy the desired privat IP address"
   default = {
-    private_ip_address            = [null]
+    private_ip_address1           = [null]
+    private_ip_address2           = [null]
     private_ip_address_allocation = ["Dynamic"]
   }
 }
 variable "nic3_ip_configuration" {
   description = "Defines how a private IP address is assigned. Options are Static or Dynamic. In case of Static also specifiy the desired privat IP address"
   default = {
-    private_ip_address            = [null]
+    private_ip_address1           = [null]
+    private_ip_address2           = [null]
     private_ip_address_allocation = ["Dynamic"]
   }
 }
