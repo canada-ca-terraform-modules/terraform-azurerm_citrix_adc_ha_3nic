@@ -1,0 +1,13 @@
+{
+    "username":"${var.admin_username}",
+    "ha_config":{
+        "peer_node":"'${var.nic1_ip_configuration.private_ip_address1}'"
+    },
+    "vpx_config":{
+        "snip_11":"'${var.nic2_ip_configuration.private_ip_address2}'",
+        "pvt_ip_12":"'${var.nic3_ip_configuration.private_ip_address2}'",
+        "subnet_11":"'${data.azurerm_subnet.subnet2.address_prefixes[0]}'",
+        "subnet_12":"'${data.azurerm_subnet.subnet3.address_prefixes[0]}'"
+    }
+}
+				
