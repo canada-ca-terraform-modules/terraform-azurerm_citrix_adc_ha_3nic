@@ -2,6 +2,10 @@ output "vm1" {
   value = azurerm_linux_virtual_machine.VM1
 }
 
+output "vm2" {
+  value = azurerm_linux_virtual_machine.VM2
+}
+
 output "nic1-1" {
   value = azurerm_network_interface.NIC1-1
 }
