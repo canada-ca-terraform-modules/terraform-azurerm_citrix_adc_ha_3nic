@@ -110,7 +110,8 @@ variable "custom_data" {
 }
 
 variable "vm_size" {
-  description = "Specifies the size of the Virtual Machine. Eg: Standard_F4"
+  description = "Specifies the size of the Virtual Machine. Eg: Standard_DS3_v2"
+  default = "Standard_DS3_v2"
 }
 
 variable "storage_image_reference" {
