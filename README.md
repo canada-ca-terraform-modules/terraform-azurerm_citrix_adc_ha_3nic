@@ -1,0 +1,1 @@
+# terraform-azurerm_citrix_adc_ha_3nic
