@@ -112,8 +112,10 @@ dnsServers = ["10.20.30.40","10.20.30.41]
 
 | Name                          | Type | Required | Value                                                                                                                                                           |
 | ----------------------------- | ---- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| private_ip_address            | list | yes      | List of Static IP desired for each IP allocation. Set each list items to null if using Dynamic allocation or to an static IP part of the subnet is using Static |
-| private_ip_address_allocation | list | yes      | List of IP allocation type for each ip configuration. Set each to either Dynamic or Static                                                                      |
+| private_ip_address1            | string | yes      | Static IP desired for VM1. Set to null if using Dynamic allocation or to an static IP part of the subnet is using Static |
+| private_ip_address2            | string | yes      | Static IP desired for VM1. Set to null if using Dynamic allocation or to an static IP part of the subnet is using Static |
+| private_ip_address_allocation | string | yes      | IP allocation type for ip configuration. Set to either Dynamic or Static                                                                      |
+
 Default:
 
 ```hcl
