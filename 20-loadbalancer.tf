@@ -1,7 +1,7 @@
 resource "azurerm_lb" "loadbalancer" {
   name                = "${var.name}-lb"
   location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = var.resource_group.name
   frontend_ip_configuration {
     name                          = "${var.name}-lbfe"
     private_ip_address_allocation = "Static"
@@ -11,20 +11,20 @@ resource "azurerm_lb" "loadbalancer" {
 }
 
 resource "azurerm_lb_probe" "loadbalancer-TCP9000-lbhp" {
-  resource_group_name = var.resource_group_name
+  resource_group_name = var.resource_group.name
   loadbalancer_id     = azurerm_lb.loadbalancer.id
   name                = "${var.name}-TCP9000-lbhp"
   port                = 9000
 }
 
 resource "azurerm_lb_backend_address_pool" "loadbalancer-VPXServers-lbbp" {
-  resource_group_name = var.resource_group_name
+  resource_group_name = var.resource_group.name
   loadbalancer_id     = azurerm_lb.loadbalancer.id
   name                = "${var.name}-VPXServers-lbbp"
 }
 
 resource "azurerm_lb_rule" "loadbalancer-TCP443-lbr" {
-  resource_group_name            = var.resource_group_name
+  resource_group_name            = var.resource_group.name
   loadbalancer_id                = azurerm_lb.loadbalancer.id
   name                           = "${var.name}-TCP443-lbr"
   protocol                       = "Tcp"
@@ -37,7 +37,7 @@ resource "azurerm_lb_rule" "loadbalancer-TCP443-lbr" {
 }
 
 resource "azurerm_lb_rule" "loadbalancer-TCP80-lbr" {
-  resource_group_name            = var.resource_group_name
+  resource_group_name            = var.resource_group.name
   loadbalancer_id                = azurerm_lb.loadbalancer.id
   name                           = "${var.name}-TCP80-lbr"
   protocol                       = "Tcp"

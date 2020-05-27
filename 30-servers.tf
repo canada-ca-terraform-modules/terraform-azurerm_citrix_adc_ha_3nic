@@ -1,7 +1,7 @@
 resource "azurerm_storage_account" "boot_diagnostic" {
   count                    = var.boot_diagnostic ? 1 : 0
   name                     = local.storageName
-  resource_group_name      = var.resource_group_name
+  resource_group_name      = var.resource_group.name
   location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
@@ -12,7 +12,7 @@ resource azurerm_network_interface NIC1-1 {
   name                          = "${var.name}1-nic1"
   depends_on                    = [var.nic1_depends_on]
   location                      = var.location
-  resource_group_name           = var.resource_group_name
+  resource_group_name           = var.resource_group.name
   enable_ip_forwarding          = var.nic_enable_ip_forwarding
   enable_accelerated_networking = var.nic_enable_accelerated_networking
   dns_servers                   = var.dnsServers
@@ -32,7 +32,7 @@ resource azurerm_network_interface NIC2-1 {
   name                          = "${var.name}1-nic2"
   depends_on                    = [var.nic2_depends_on]
   location                      = var.location
-  resource_group_name           = var.resource_group_name
+  resource_group_name           = var.resource_group.name
   enable_ip_forwarding          = var.nic_enable_ip_forwarding
   enable_accelerated_networking = var.nic_enable_accelerated_networking
   dns_servers                   = var.dnsServers
@@ -58,7 +58,7 @@ resource azurerm_network_interface NIC3-1 {
   name                          = "${var.name}1-nic3"
   depends_on                    = [var.nic3_depends_on]
   location                      = var.location
-  resource_group_name           = var.resource_group_name
+  resource_group_name           = var.resource_group.name
   enable_ip_forwarding          = var.nic_enable_ip_forwarding
   enable_accelerated_networking = var.nic_enable_accelerated_networking
   dns_servers                   = var.dnsServers
@@ -78,7 +78,7 @@ resource azurerm_network_interface NIC1-2 {
   name                          = "${var.name}2-nic1"
   depends_on                    = [var.nic1_depends_on]
   location                      = var.location
-  resource_group_name           = var.resource_group_name
+  resource_group_name           = var.resource_group.name
   enable_ip_forwarding          = var.nic_enable_ip_forwarding
   enable_accelerated_networking = var.nic_enable_accelerated_networking
   dns_servers                   = var.dnsServers
@@ -98,7 +98,7 @@ resource azurerm_network_interface NIC2-2 {
   name                          = "${var.name}2-nic2"
   depends_on                    = [var.nic2_depends_on]
   location                      = var.location
-  resource_group_name           = var.resource_group_name
+  resource_group_name           = var.resource_group.name
   enable_ip_forwarding          = var.nic_enable_ip_forwarding
   enable_accelerated_networking = var.nic_enable_accelerated_networking
   dns_servers                   = var.dnsServers
@@ -124,7 +124,7 @@ resource azurerm_network_interface NIC3-2 {
   name                          = "${var.name}2-nic3"
   depends_on                    = [var.nic3_depends_on]
   location                      = var.location
-  resource_group_name           = var.resource_group_name
+  resource_group_name           = var.resource_group.name
   enable_ip_forwarding          = var.nic_enable_ip_forwarding
   enable_accelerated_networking = var.nic_enable_accelerated_networking
   dns_servers                   = var.dnsServers
@@ -143,7 +143,7 @@ resource azurerm_linux_virtual_machine VM1 {
   name                            = "${var.name}1"
   depends_on                      = [var.vm_depends_on]
   location                        = var.location
-  resource_group_name             = var.resource_group_name
+  resource_group_name             = var.resource_group.name
   admin_username                  = var.admin_username
   admin_password                  = var.admin_password
   disable_password_authentication = false
@@ -188,7 +188,7 @@ resource azurerm_linux_virtual_machine VM2 {
   name                            = "${var.name}2"
   depends_on                      = [var.vm_depends_on]
   location                        = var.location
-  resource_group_name             = var.resource_group_name
+  resource_group_name             = var.resource_group.name
   admin_username                  = var.admin_username
   admin_password                  = var.admin_password
   disable_password_authentication = false

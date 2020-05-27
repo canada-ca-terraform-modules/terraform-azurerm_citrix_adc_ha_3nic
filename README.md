@@ -27,7 +27,7 @@ Optional (depending on options configured):
 module "SRV-CTXADC" {
   source = "github.com/canada-ca-terraform-modules/terraform-azurerm_citrix_adc?ref=20200522.1"
   name                    = "${var.env}SRV-CTXADC"
-  resource_group_name     = azurerm_resource_group.PROJ_SAS_VIYA_DMZ-rg.name
+  resource_group          = azurerm_resource_group.PROJ_SAS_VIYA_DMZ-rg
   location                = var.location
   admin_username          = var.vm_configs.SRV-CTXADC.admin_username
   admin_password          = var.vm_configs.SRV-CTXADC.admin_password
@@ -63,7 +63,7 @@ module "SRV-CTXADC" {
 | Name                    | Type   | Required | Value                                                                                                                                                                                                       |
 | ----------------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name                    | string | yes      | Name of the vm                                                                                                                                                                                              |
-| resource_group_name     | string | yes      | Name of the resourcegroup that will contain the VM resources                                                                                                                                                |
+| resource_group          | object | yes      | Resourcegroup object that will contain the VM resources                                                                                                                                                     |
 | admin_username          | string | yes      | Name of the VM admin account                                                                                                                                                                                |
 | admin_password          | string | yes      | Password of the VM admin account                                                                                                                                                                            |
 | nic1_subnetName         | string | yes      | Name of the subnet to which the MGMT NIC will connect to                                                                                                                                                    |
@@ -175,7 +175,8 @@ plan = {
 
 ## History
 
-| Date     | Release    | Change     |
-| -------- | ---------- | ---------- |
-| 20200506 | 20200506.1 | 1st commit |
+| Date     | Release    | Change                                                                         |
+| -------- | ---------- | ------------------------------------------------------------------------------ |
+| 20200506 | 20200506.1 | 1st commit                                                                     |
+| 20200528 | 20200528.1 | Make the resource_group variable an object vs a string to fix dependancy issue |
 
