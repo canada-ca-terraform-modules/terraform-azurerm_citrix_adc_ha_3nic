@@ -60,30 +60,29 @@ module "SRV-CTXADC" {
 
 ## Variables Values
 
-| Name                               | Type   | Required | Value                                                                                                                                                                                                       |
-| ---------------------------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name                               | string | yes      | Name of the vm                                                                                                                                                                                              |
-| resource_group_name                | string | yes      | Name of the resourcegroup that will contain the VM resources                                                                                                                                                |
-| admin_username                     | string | yes      | Name of the VM admin account                                                                                                                                                                                |
-| admin_password                     | string | yes      | Password of the VM admin account                                                                                                                                                                            |
-| nic1_subnetName                    | string | yes      | Name of the subnet to which the MGMT NIC will connect to                                                                                                                                                    |
-| nic2_subnetName                    | string | yes      | Name of the subnet to which the Client NIC will connect to                                                                                                                                                  |
-| nic3_subnetName                    | string | yes      | Name of the subnet to which the Server NIC will connect to                                                                                                                                                  |
-| nic_vnetName                       | string | yes      | Name of the VNET the subnet1,2 & 3 are part of                                                                                                                                                              |
-| nic_resource_group_name            | string | yes      | Name of the resourcegroup containing the VNET                                                                                                                                                               |
-| vm_size                            | string | no      | Specifies the desired size of the Virtual Machines. Default: Standard_DS3_v2                                                                                                                                         |
-| location                           | string | no       | Azure location for resources. Default: canadacentral                                                                                                                                                        |
-| tags                               | object | no       | Object containing a tag values - [tags pairs](#tag-object)                                                                                                                                                  |
-| os_managed_disk_type               | string | no       | Specifies the type of OS Managed Disk which should be created. Possible values are Standard_LRS or Premium_LRS. Default: Standard_LRS                                                                       |
-| dnsServers                         | list   | no       | List of DNS servers IP addresses as string to use for this NIC, overrides the VNet-level dns server list - [dns servers](#dns-servers-list)                                                                 |
-| nic1_ip_configuration              | object | no       | Defines how a private IP address is assigned. Options are Static or Dynamic. In case of Static also specifiy the desired privat IP address. Default: Dynamic - [ip configuration](#ip-configuration-object) |
-| nic2_ip_configuration              | object | no       | Defines how a private IP address is assigned. Options are Static or Dynamic. In case of Static also specifiy the desired privat IP address. Default: Dynamic - [ip configuration](#ip-configuration-object) |
-| nic3_ip_configuration              | object | no       | Defines how a private IP address is assigned. Options are Static or Dynamic. In case of Static also specifiy the desired privat IP address. Default: Dynamic - [ip configuration](#ip-configuration-object) |
-| public_ip                          | bool   | no       | Does the Cluster require a public IP. true or false. Default: false                                                                                                                                         |
-| storage_image_reference            | object | no       | Specify the storage image used to create the VM. Default is 2016-Datacenter. - [storage image](#storage-image-reference-object)                                                                             |
-| plan                               | object | no       | Specify the plan used to create the VM. Default is null. - [plan](#plan-object)                                                                                                                             |
-| storage_os_disk                    | object | no       | Storage OS Disk configuration. Default: ReadWrite from image.                                                                                                                                               |
-| boot_diagnostic                    | bool   | no       | Should a boot be turned on or not. Default: false                                                                                                                                                           |
+| Name                    | Type   | Required | Value                                                                                                                                                                                                       |
+| ----------------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name                    | string | yes      | Name of the vm                                                                                                                                                                                              |
+| resource_group_name     | string | yes      | Name of the resourcegroup that will contain the VM resources                                                                                                                                                |
+| admin_username          | string | yes      | Name of the VM admin account                                                                                                                                                                                |
+| admin_password          | string | yes      | Password of the VM admin account                                                                                                                                                                            |
+| nic1_subnetName         | string | yes      | Name of the subnet to which the MGMT NIC will connect to                                                                                                                                                    |
+| nic2_subnetName         | string | yes      | Name of the subnet to which the Client NIC will connect to                                                                                                                                                  |
+| nic3_subnetName         | string | yes      | Name of the subnet to which the Server NIC will connect to                                                                                                                                                  |
+| nic_vnetName            | string | yes      | Name of the VNET the subnet1,2 & 3 are part of                                                                                                                                                              |
+| nic_resource_group_name | string | yes      | Name of the resourcegroup containing the VNET                                                                                                                                                               |
+| vm_size                 | string | no       | Specifies the desired size of the Virtual Machines. Default: Standard_DS3_v2                                                                                                                                |
+| location                | string | no       | Azure location for resources. Default: canadacentral                                                                                                                                                        |
+| tags                    | object | no       | Object containing a tag values - [tags pairs](#tag-object)                                                                                                                                                  |
+| os_managed_disk_type    | string | no       | Specifies the type of OS Managed Disk which should be created. Possible values are Standard_LRS or Premium_LRS. Default: Standard_LRS                                                                       |
+| dnsServers              | list   | no       | List of DNS servers IP addresses as string to use for this NIC, overrides the VNet-level dns server list - [dns servers](#dns-servers-list)                                                                 |
+| nic1_ip_configuration   | object | no       | Defines how a private IP address is assigned. Options are Static or Dynamic. In case of Static also specifiy the desired privat IP address. Default: Dynamic - [ip configuration](#ip-configuration-object) |
+| nic2_ip_configuration   | object | no       | Defines how a private IP address is assigned. Options are Static or Dynamic. In case of Static also specifiy the desired privat IP address. Default: Dynamic - [ip configuration](#ip-configuration-object) |
+| nic3_ip_configuration   | object | no       | Defines how a private IP address is assigned. Options are Static or Dynamic. In case of Static also specifiy the desired privat IP address. Default: Dynamic - [ip configuration](#ip-configuration-object) |
+| public_ip               | bool   | no       | Does the Cluster require a public IP. true or false. Default: false                                                                                                                                         |
+| storage_image_reference | object | no       | Specify the storage image used to create the VM. Default is Citrix-ADC. - [storage image](#storage-image-reference-object)                                                                                  |
+| plan                    | object | no       | Specify the plan used to create the VM. Default is Citrix-ADC. - [plan](#plan-object)                                                                                                                       |
+| boot_diagnostic         | bool   | no       | Should a boot be turned on or not. Default: false                                                                                                                                                           |
 
 ### tag object
 
@@ -110,11 +109,11 @@ dnsServers = ["10.20.30.40","10.20.30.41]
 
 ### ip configuration object
 
-| Name                          | Type | Required | Value                                                                                                                                                           |
-| ----------------------------- | ---- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| private_ip_address1            | string | yes      | Static IP desired for VM1. Set to null if using Dynamic allocation or to an static IP part of the subnet is using Static |
-| private_ip_address2            | string | yes      | Static IP desired for VM1. Set to null if using Dynamic allocation or to an static IP part of the subnet is using Static |
-| private_ip_address_allocation | string | yes      | IP allocation type for ip configuration. Set to either Dynamic or Static                                                                      |
+| Name                          | Type   | Required | Value                                                                                                                    |
+| ----------------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------ |
+| private_ip_address1           | string | yes      | Static IP desired for VM1. Set to null if using Dynamic allocation or to an static IP part of the subnet is using Static |
+| private_ip_address2           | string | yes      | Static IP desired for VM1. Set to null if using Dynamic allocation or to an static IP part of the subnet is using Static |
+| private_ip_address_allocation | string | yes      | IP allocation type for ip configuration. Set to either Dynamic or Static                                                 |
 
 Default:
 
@@ -130,20 +129,20 @@ Example variable for a NIC with 2 staticly assigned IP and one dynamic:
 
 ```hcl
 nic1_ip_configuration = {
-    private_ip_address1           = local.SRV-CTXADC1-RZ
-    private_ip_address2           = local.SRV-CTXADC2-RZ
-    private_ip_address_allocation = "Static"
-  }
+  private_ip_address1           = local.SRV-CTXADC1-RZ
+  private_ip_address2           = local.SRV-CTXADC2-RZ
+  private_ip_address_allocation = "Static"
+}
 ```
 
 ### storage image reference object
 
-| Name      | Type       | Required           | Value                                                                                              |
-| --------- | ---------- | ------------------ | -------------------------------------------------------------------------------------------------- |
-| publisher | string     | yes                | The image publisher.                                                                               |
-| offer     | string     | yes                | Specifies the offer of the platform image or marketplace image used to create the virtual machine. |
-| sku       | string     | yes                | The image SKU.                                                                                     |
-| version   | string yes | The image version. |
+| Name      | Type   | Required | Value                                                                                              |
+| --------- | ------ | -------- | -------------------------------------------------------------------------------------------------- |
+| publisher | string | yes      | The image publisher.                                                                               |
+| offer     | string | yes      | Specifies the offer of the platform image or marketplace image used to create the virtual machine. |
+| sku       | string | yes      | The image SKU.                                                                                     |
+| version   | string | yes      | The image version.                                                                                 |
 
 Example variable:
 
