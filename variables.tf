@@ -19,35 +19,9 @@ variable "tags" {
   }
 }
 
-variable "deploy" {
-  description = "Should resources in this module be deployed"
-  default     = true
+variable "name" {
+  description = "Name of the linux vm"
 }
-
-variable "env" {
-  description = "4 chars env name"
-  type        = string
-}
-
-variable "serverType" {
-  description = "3 chars server type"
-  type        = string
-  default     = "SRV"
-}
-
-variable "userDefinedString" {
-  description = "User defined portion of the server name. Up to 8 chars minus the postfix lenght"
-  type        = string
-}
-
-variable "postfix" {
-  description = "(Optional) Desired postfix value for the name. Max 3 chars."
-  type        = string
-  default     = ""
-}
-//variable "name" {
-//  description = "Name of the linux vm"
-//}
 
 variable "nic1_subnetName" {
   description = "Name of the subnet to which the VM NIC1 will connect to"
