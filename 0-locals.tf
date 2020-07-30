@@ -9,4 +9,11 @@ locals {
   fixname3        = substr("${local.fixname2}diag", 0, 16)
   storageName     = lower("${local.fixname3}${local.unique}")
   eviction_policy = var.priority == "Regular" ? null : var.eviction_policy
+  
+  windows_virtual_machine_regex = "/[//\"'\\[\\]:|<>+=;,?*@&]/" # Can't include those characters in windows_virtual_machine name: \/"'[]:|<>+=;,?*@&
+  env_4                         = substr(var.env, 0, 4)
+  serverType_3                  = substr(var.serverType, 0, 3)
+  userDefinedString_7           = substr(var.userDefinedString, 0, 7)
+  prefix                        = replace("${local.env_4}${local.serverType_3}-${local.userDefinedString_7}", local.windows_virtual_machine_regex, "")
+  vm-name                       = replace("${local.env_4}${local.serverType_3}-${local.userDefinedString_7}${local.postfix_3}", local.windows_virtual_machine_regex, "")
 }

@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "boot_diagnostic" {
-  count                    = var.boot_diagnostic ? 1 : 0
+  count                    = var.boot_diagnostic && var.deploy ? 1 : 0 # This implement an AND condition for OR use 
   name                     = local.storageName
   resource_group_name      = var.resource_group.name
   location                 = var.location
@@ -9,7 +9,8 @@ resource "azurerm_storage_account" "boot_diagnostic" {
 
 # MGMT
 resource azurerm_network_interface NIC1-1 {
-  name                          = "${var.name}1-nic1"
+  count                         = var.deploy ? 1 : 0
+  name                          = "${local.vm-name}1-nic1"
   depends_on                    = [var.nic1_depends_on]
   location                      = var.location
   resource_group_name           = var.resource_group.name
@@ -29,7 +30,8 @@ resource azurerm_network_interface NIC1-1 {
 
 # Client
 resource azurerm_network_interface NIC2-1 {
-  name                          = "${var.name}1-nic2"
+  count                         = var.deploy ? 1 : 0
+  name                          = "${local.vm-name}1-nic2"
   depends_on                    = [var.nic2_depends_on]
   location                      = var.location
   resource_group_name           = var.resource_group.name
@@ -48,6 +50,7 @@ resource azurerm_network_interface NIC2-1 {
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "NIC2-1" {
+  count                         = var.deploy ? 1 : 0
   network_interface_id    = azurerm_network_interface.NIC2-1.id
   ip_configuration_name   = "ipconfig1"
   backend_address_pool_id = azurerm_lb_backend_address_pool.loadbalancer-VPXServers-lbbp.id
@@ -55,7 +58,8 @@ resource "azurerm_network_interface_backend_address_pool_association" "NIC2-1" {
 
 # Server
 resource azurerm_network_interface NIC3-1 {
-  name                          = "${var.name}1-nic3"
+  count                         = var.deploy ? 1 : 0
+  name                          = "${local.vm-name}1-nic3"
   depends_on                    = [var.nic3_depends_on]
   location                      = var.location
   resource_group_name           = var.resource_group.name
@@ -75,7 +79,8 @@ resource azurerm_network_interface NIC3-1 {
 
 # MGMT
 resource azurerm_network_interface NIC1-2 {
-  name                          = "${var.name}2-nic1"
+  count                         = var.deploy ? 1 : 0
+  name                          = "${local.vm-name}2-nic1"
   depends_on                    = [var.nic1_depends_on]
   location                      = var.location
   resource_group_name           = var.resource_group.name
@@ -95,7 +100,8 @@ resource azurerm_network_interface NIC1-2 {
 
 # Client
 resource azurerm_network_interface NIC2-2 {
-  name                          = "${var.name}2-nic2"
+  count                         = var.deploy ? 1 : 0
+  name                          = "${local.vm-name}2-nic2"
   depends_on                    = [var.nic2_depends_on]
   location                      = var.location
   resource_group_name           = var.resource_group.name
@@ -114,6 +120,7 @@ resource azurerm_network_interface NIC2-2 {
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "NIC2-2" {
+  count                         = var.deploy ? 1 : 0
   network_interface_id    = azurerm_network_interface.NIC2-2.id
   ip_configuration_name   = "ipconfig1"
   backend_address_pool_id = azurerm_lb_backend_address_pool.loadbalancer-VPXServers-lbbp.id
@@ -121,7 +128,8 @@ resource "azurerm_network_interface_backend_address_pool_association" "NIC2-2" {
 
 # Server
 resource azurerm_network_interface NIC3-2 {
-  name                          = "${var.name}2-nic3"
+  count                         = var.deploy ? 1 : 0
+  name                          = "${local.vm-name}2-nic3"
   depends_on                    = [var.nic3_depends_on]
   location                      = var.location
   resource_group_name           = var.resource_group.name
@@ -140,14 +148,15 @@ resource azurerm_network_interface NIC3-2 {
 }
 
 resource azurerm_linux_virtual_machine VM1 {
-  name                            = "${var.name}1"
+  count                 = var.deploy ? 1 : 0
+  name                            = "${local.vm-name}1"
   depends_on                      = [var.vm_depends_on]
   location                        = var.location
   resource_group_name             = var.resource_group.name
   admin_username                  = var.admin_username
   admin_password                  = var.admin_password
   disable_password_authentication = false
-  computer_name                   = "${var.name}1"
+  computer_name                   = "${local.vm-name}1"
   custom_data                     = var.custom_data
   size                            = var.vm_size
   priority                        = var.priority
@@ -170,7 +179,7 @@ resource azurerm_linux_virtual_machine VM1 {
   }
   provision_vm_agent = true
   os_disk {
-    name                 = "${var.name}1-osdisk1"
+    name                 = "${local.vm-name}1-osdisk1"
     caching              = var.storage_os_disk.caching
     storage_account_type = var.os_managed_disk_type
     disk_size_gb         = var.storage_os_disk.disk_size_gb
@@ -185,14 +194,15 @@ resource azurerm_linux_virtual_machine VM1 {
 }
 
 resource azurerm_linux_virtual_machine VM2 {
-  name                            = "${var.name}2"
+  count                 = var.deploy ? 1 : 0
+  name                            = "${local.vm-name}2"
   depends_on                      = [var.vm_depends_on]
   location                        = var.location
   resource_group_name             = var.resource_group.name
   admin_username                  = var.admin_username
   admin_password                  = var.admin_password
   disable_password_authentication = false
-  computer_name                   = "${var.name}2"
+  computer_name                   = "${local.vm-name}2"
   custom_data                     = var.custom_data
   size                            = var.vm_size
   priority                        = var.priority
@@ -215,7 +225,7 @@ resource azurerm_linux_virtual_machine VM2 {
   }
   provision_vm_agent = true
   os_disk {
-    name                 = "${var.name}2-osdisk1"
+    name                 = "${local.vm-name}2-osdisk1"
     caching              = var.storage_os_disk.caching
     storage_account_type = var.os_managed_disk_type
     disk_size_gb         = var.storage_os_disk.disk_size_gb
